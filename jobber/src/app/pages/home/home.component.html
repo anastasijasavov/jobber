@@ -1,0 +1,16 @@
+<div class="cards">
+  <mat-card class="card" *ngFor="let job of jobs">
+    <mat-card-title>{{ job.header }}</mat-card-title>
+    <mat-card-content>{{ job.description }}</mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="applyForJob(job)">Apply now</button>
+      <button mat-button (click)="like(job, 1)" *ngIf="!job.isLiked">
+        Like
+      </button>
+      <button mat-button (click)="like(job, -1)" *ngIf="job.isLiked">
+        Unlike
+      </button>
+      <mat-label>{{ job.likesCount }}</mat-label>
+    </mat-card-actions>
+  </mat-card>
+</div>

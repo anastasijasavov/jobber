@@ -1,0 +1,20 @@
+<form formGroupName="userForm" *ngIf="inputMode">
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input [readonly]="inputMode" value="user.firstName"
+  /></mat-form-field>
+  <mat-form-field>
+    <mat-label>Last name</mat-label>
+    <input [readonly]="inputMode" value="user.lastName"
+  /></mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input readonly value="user.email"
+  /></mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input type="password" [readonly]="inputMode" value="user.password"
+  /></mat-form-field>
+  <button mat-button (click)="changeMode()">Edit</button>
+  <button mat-button (submit)="updateUser()" *ngIf="inputMode">Save</button>
+</form>
