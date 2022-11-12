@@ -1,0 +1,102 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "anastasija.savov2000@gmail.com",
+      "name": "Anastasija Savov",
+      "passwordHash": "$2a$12$klNrHq6ba3Pn68UX73hj2OEPclDlonxvYbyBJQKp1g.ah8iHkAFbK",
+      "userTypeId": 2
+    },
+    {
+      "id": 2,
+      "email": "anastasija.org@gmail.com",
+      "name": "Cilim Tech",
+      "passwordHash": "$2a$12$klNrHq6ba3Pn68UX73hj2OEPclDlonxvYbyBJQKp1g.ah8iHkAFbK",
+      "userTypeId": 1
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "header": ".NET Developer",
+      "description": "We are looking for an experienced .NET Developer with minimum  od 3 years of work experience.",
+      "workTypeId": 1,
+      "categoryId": 1,
+      "createdBy": 2,
+      "likesCount": 1
+    },
+    {
+      "id": 2,
+      "header": "UI/UX Designer",
+      "description": "We are looking for an experienced UX designer with minimum of 1 year of work experience.",
+      "workTypeId": 1,
+      "categoryId": 1,
+      "createdBy": 2,
+      "likesCount": 1
+    }
+  ],
+  "userJobs": [
+    {
+      "id": 1,
+      "userId": 1,
+      "jobId": 1
+    }
+  ],
+  "organizationOffers": [
+    {
+      "id": 1,
+      "organizationId": 2,
+      "jobOfferId": 1
+    }
+  ],
+  "userTypes": [
+    {
+      "id": 1,
+      "description": "Organization"
+    },
+    {
+      "id": 2,
+      "description": "User"
+    }
+  ],
+  "workType": [
+    {
+      "id": 1,
+      "name": "Full time"
+    },
+    {
+      "id": 2,
+      "name": "Part time"
+    },
+    {
+      "id": 3,
+      "name": "Remote"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Office administration"
+    },
+    {
+      "id": 2,
+      "name": "Development"
+    },
+    {
+      "id": 3,
+      "name": "HR"
+    }
+  ],
+  "jobLikes": [
+    {
+      "userId": 1,
+      "jobId": 1,
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "jobId": 2,
+      "id": 2
+    }
+  ]
+}
