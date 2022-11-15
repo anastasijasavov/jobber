@@ -3,7 +3,9 @@
     <mat-card-title>{{ job.header }}</mat-card-title>
     <mat-card-content>{{ job.description }}</mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="applyForJob(job)">Apply now</button>
+      <button mat-button (click)="applyForJob(job)" *ngIf="!isOrganization">
+        Apply now
+      </button>
       <button mat-button (click)="like(job, 1)" *ngIf="!job.isLiked">
         Like
       </button>

@@ -1,1 +1,35 @@
-<p>signup works!</p>
+<form class="form" [formGroup]="userCreateForm">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      placeholder="Ex. example@gmail.com"
+      formControlName="email"
+    />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" />
+  </mat-form-field>
+
+  <div class="dropdown">
+    <mat-label>Sign up as</mat-label>
+    <mat-select formControlName="userType">
+      <mat-option value="user">User</mat-option>
+      <mat-option value="organization">Organization</mat-option>
+    </mat-select>
+  </div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phoneNumber" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="submit()">Sign up</button>
+</form>

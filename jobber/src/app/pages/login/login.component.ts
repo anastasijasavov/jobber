@@ -28,15 +28,20 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.sub = this.authService.login(user).subscribe({
       next: (res) => {
-        if (res) {
+        if (res && res.length > 0) {
           this.authService.getUserByEmail(user.email!).subscribe((res) => {
             localStorage.setItem(
               'user',
-              JSON.stringify({ email: user.email!, id: res[0].id! })
+              JSON.stringify({
+                email: user.email!,
+                id: res[0].id!,
+                userType: res[0].userTypeId,
+              })
             );
           });
           this.router.navigate(['home']);
         }
+        //else add validation
       },
       error: (err) => console.error(err),
     });

@@ -2,17 +2,30 @@
   "users": [
     {
       "id": 1,
+      "firstName": "Anastasija",
+      "lastName": "Savov",
+      "password": "sifra",
       "email": "anastasija.savov2000@gmail.com",
-      "name": "Anastasija Savov",
-      "passwordHash": "$2a$12$klNrHq6ba3Pn68UX73hj2OEPclDlonxvYbyBJQKp1g.ah8iHkAFbK",
-      "userTypeId": 2
+      "userTypeId": 1
     },
     {
-      "id": 2,
-      "email": "anastasija.org@gmail.com",
-      "name": "Cilim Tech",
-      "passwordHash": "$2a$12$klNrHq6ba3Pn68UX73hj2OEPclDlonxvYbyBJQKp1g.ah8iHkAFbK",
-      "userTypeId": 1
+      "email": "testic@gmail.com",
+      "firstName": "Testic",
+      "lastName": "Testovski",
+      "password": "sifrica123",
+      "userTypeId": 1,
+      "phoneNumber": "648979230",
+      "id": 3
+    },
+    {
+      "email": "testic2@gmail.com",
+      "firstName": "Testic2",
+      "lastName": "Testovski2",
+      "password": "sifrica123",
+      "userTypeId": 2,
+      "phoneNumber": "648979230",
+      "id": 4,
+      "name": "undefined undefined"
     }
   ],
   "jobs": [
@@ -23,7 +36,7 @@
       "workTypeId": 1,
       "categoryId": 1,
       "createdBy": 2,
-      "likesCount": 1
+      "likesCount": 3
     },
     {
       "id": 2,
@@ -32,14 +45,46 @@
       "workTypeId": 1,
       "categoryId": 1,
       "createdBy": 2,
-      "likesCount": 1
+      "likesCount": 2
+    },
+    {
+      "likesCount": 1,
+      "header": "testic poso",
+      "description": "poslic",
+      "workTypeId": 0,
+      "categoryId": 0,
+      "createdBy": 4,
+      "id": 3
     }
   ],
   "userJobs": [
     {
       "id": 1,
       "userId": 1,
-      "jobId": 1
+      "jobId": 1,
+      "appliedAt": "2022-11-11T18:11:14.361Z",
+      "isApproved": true
+    },
+    {
+      "userId": 1,
+      "jobId": 2,
+      "appliedAt": "2022-11-12T18:12:14.361Z",
+      "id": 2,
+      "isApproved": false
+    },
+    {
+      "userId": 4,
+      "jobId": 1,
+      "appliedAt": "2022-11-13T00:53:44.483Z",
+      "id": 3,
+      "isApproved": false
+    },
+    {
+      "userId": 1,
+      "jobId": 3,
+      "appliedAt": "2022-11-15T22:41:03.400Z",
+      "isApproved": null,
+      "id": 4
     }
   ],
   "organizationOffers": [
@@ -59,7 +104,7 @@
       "description": "User"
     }
   ],
-  "workType": [
+  "workTypes": [
     {
       "id": 1,
       "name": "Full time"
@@ -90,13 +135,28 @@
   "jobLikes": [
     {
       "userId": 1,
+      "jobId": 2,
+      "id": 2
+    },
+    {
+      "userId": 4,
       "jobId": 1,
-      "id": 1
+      "id": 3
+    },
+    {
+      "userId": 4,
+      "jobId": 2,
+      "id": 4
     },
     {
       "userId": 1,
-      "jobId": 2,
-      "id": 2
+      "jobId": 1,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "jobId": 3,
+      "id": 6
     }
   ]
 }

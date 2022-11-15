@@ -1,1 +1,21 @@
-<p>my-jobs works!</p>
+<mat-label>My applications</mat-label>
+<div class="cards">
+  <mat-card class="card" *ngFor="let myJob of myJobs$ | async">
+    <mat-card-title>{{ myJob.header }}</mat-card-title>
+    <mat-card-subtitle
+      >Applied at {{ myJob.appliedAt }} Status
+      {{
+        myJob.isApproved === true
+          ? "Approved"
+          : myJob.isApproved === false
+          ? "Declined"
+          : "Pending"
+      }}</mat-card-subtitle
+    >
+    <mat-card-content>{{ myJob.description }}</mat-card-content>
+    <mat-card-footer>
+      <mat-label>{{ myJob.jobCategoryName }}</mat-label>
+      <mat-label> {{ myJob.jobTypeName }}</mat-label>
+    </mat-card-footer>
+  </mat-card>
+</div>

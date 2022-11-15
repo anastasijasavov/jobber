@@ -20,6 +20,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatCardModule } from '@angular/material/card';
 import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
+import { MyJobOffersComponent } from './pages/my-job-offers/my-job-offers.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +33,7 @@ import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
     ProfileComponent,
     SideNavComponent,
     MyJobsComponent,
+    MyJobOffersComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,7 @@ import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
     FontAwesomeModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

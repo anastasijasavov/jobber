@@ -1,0 +1,38 @@
+<mat-label>My job offers</mat-label>
+<button mat-button color="accent" (click)="openJobDialog()">Post a job</button>
+<div class="cards">
+  <mat-card class="card" *ngFor="let myJob of jobOffers">
+    <mat-card-title>{{ myJob.header }}</mat-card-title>
+    <mat-card-content>{{ myJob.description }}</mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="showCandidates(myJob.id!)">
+        Show candidates
+      </button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-label>{{ myJob.jobCategoryName }}</mat-label>
+      <mat-label> {{ myJob.jobTypeName }}</mat-label>
+      <div class="candidates-list">
+        <ul>
+          <li *ngFor="let user of myJob.candidates">
+            <mat-label>
+              {{ user.email }}
+            </mat-label>
+            <button
+              mat-button
+              (click)="updateCandidate(user.id, myJob.id!, true)"
+            >
+              Accept
+            </button>
+            <button
+              mat-button
+              (click)="updateCandidate(user.id, myJob.id!, false)"
+            >
+              Decline
+            </button>
+          </li>
+        </ul>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

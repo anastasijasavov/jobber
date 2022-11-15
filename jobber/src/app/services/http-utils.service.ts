@@ -9,33 +9,34 @@ import { generateHeaders, Param } from '../helper/helper';
 export class HttpUtilsService {
   constructor(private http: HttpClient) {}
 
-  get(url: string, params?: Param[]): Observable<any> {
+  get<T>(url: string, params?: Param[]): Observable<T> {
     const headers = generateHeaders();
     let isFirstParam = true;
     let paramsString = '';
     params?.forEach((param) => {
       if (isFirstParam) {
         isFirstParam = false;
+        paramsString += '?';
       } else {
         paramsString += `&`;
       }
       paramsString += `${param.name}=${param.value}`;
     });
-    return this.http.get(url + '?' + paramsString, { headers: headers });
+    return this.http.get<T>(url + paramsString, { headers: headers });
   }
 
-  post(url: string, body: any) {
+  post<T>(url: string, body: Partial<T>) {
     const headers = generateHeaders();
-    return this.http.post(url, body, { headers: headers });
+    return this.http.post<T>(url, body, { headers: headers });
   }
 
-  put(url: string, body: any) {
+  put<T>(url: string, body: T) {
     const headers = generateHeaders();
-    return this.http.put(url, body, { headers: headers });
+    return this.http.put<T>(url, body, { headers: headers });
   }
 
-  delete(url: string) {
+  delete<T>(url: string) {
     const headers = generateHeaders();
-    return this.http.delete(url, { headers: headers });
+    return this.http.delete<T>(url, { headers: headers });
   }
 }

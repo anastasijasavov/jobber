@@ -6,4 +6,5 @@ export class UserCreateDto {
   userTypeId?: UserType;
   firstName?: string;
   lastName?: string;
+  phoneNumber?: string;
 }

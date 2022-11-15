@@ -1,9 +1,13 @@
+import { User } from '../models/user.model';
 import { JobOfferCreateDto } from './job-offer-create.dto';
 
 export class JobOfferViewDto extends JobOfferCreateDto {
-  likesCount?: number;
+  override likesCount: number;
   isLiked: boolean = false;
   id?: number;
+  jobTypeName?: string;
+  jobCategoryName?: string;
+  candidates?: User[] = [];
   constructor(
     id: number,
     header: string,
@@ -16,8 +20,8 @@ export class JobOfferViewDto extends JobOfferCreateDto {
     this.id = id;
     this.header = header;
     this.description = desc;
-    this.jobType = jobType;
-    this.jobCategory = jobCat;
+    this.workTypeId = jobType;
+    this.categoryId = jobCat;
     this.likesCount = likesCount;
   }
 }

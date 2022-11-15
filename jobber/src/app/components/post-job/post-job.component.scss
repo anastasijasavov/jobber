@@ -1,0 +1,12 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  button {
+    width: fit-content;
+  }
+}
+.title {
+  font-size: medium;
+  margin: 20px 0;
+}

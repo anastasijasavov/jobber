@@ -1,9 +1,11 @@
 import { UserType } from '../helper/helper';
 
-export class User {
-  email?: string;
-  id?: number;
-  passwordHash?: string;
-  name?: string;
-  userTypeId?: UserType;
-}
+export type User = {
+  email: string;
+  id: number;
+  passwordHash: string;
+  firstName: string;
+  lastName: string;
+  userTypeId: UserType;
+  phoneNumber: string;
+};

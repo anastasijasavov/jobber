@@ -1,1 +1,38 @@
-<p>post-job works!</p>
+<form class="form" [formGroup]="jobForm">
+  <mat-label class="title">Post a job</mat-label>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput type="text" formControlName="header" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Description</mat-label>
+    <input matInput type="text" formControlName="description" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Job type</mat-label>
+    <mat-select>
+      <mat-option value="remote">Remote</mat-option>
+      <mat-option value="fullTime">Full time</mat-option>
+      <mat-option value="partTime">Part time</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Job category</mat-label>
+    <mat-select>
+      <mat-option value="category.id" *ngFor="let category of categories">{{
+        category.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="true"
+      (click)="submit()"
+    >
+      Post
+    </button>
+  </div>
+</form>

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { first, map, of, Subscription, switchMap, take } from 'rxjs';
 import { JobOfferViewDto } from 'src/app/dtos/job-offer-view.dto';
+import { UserType } from 'src/app/helper/helper';
 import { JobOffer } from 'src/app/models/job-offer.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,11 +17,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   jobSub = new Subscription();
   likeSub = new Subscription();
   jobLikeSub = new Subscription();
-  userId?: number;
+  jobApplication = new Subscription();
+  userId?: number | null;
+  isOrganization = false;
   constructor(
     private jobService: JobOfferService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.isOrganization =
+      this.authService.getUserTypeId() === UserType.Organization;
+  }
 
   ngOnInit(): void {
     this.jobSub = this.jobService.getJobOffers().subscribe({
@@ -50,9 +56,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.jobSub.unsubscribe();
     this.likeSub.unsubscribe();
+    this.jobApplication.unsubscribe();
   }
 
-  applyForJob(job: JobOfferViewDto) {}
+  applyForJob(job: JobOfferViewDto) {
+    this.jobApplication = this.jobService
+      .applyForJob(this.userId!, job.id!)
+      .subscribe((res) => console.log(res));
+  }
+
   like(job: JobOfferViewDto, likeCount: number) {
     job.likesCount! += likeCount;
     job.isLiked = !job.isLiked;
