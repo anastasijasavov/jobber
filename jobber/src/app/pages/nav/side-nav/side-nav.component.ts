@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserType } from 'src/app/helper/helper';
 import { AuthService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -11,11 +12,19 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SideNavComponent implements OnInit {
   mode: string;
   isUser: boolean = true;
-  isLoggedIn: boolean = false;
-  constructor(private authService: AuthService, private router: Router) {
-    this.mode = 'side';
-    this.isLoggedIn = this.authService.getUserId() ? true : false;
-    if (!this.isLoggedIn) this.router.navigate(['login']);
+  isLoggedIn: boolean;
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private sharedService: SharedService
+  ) {
+    if (!this.authService.getUserEmail()) {
+      this.isLoggedIn = false;
+      this.router.navigate(['login']);
+    } else this.isLoggedIn = true;
+    this.sharedService.loginSucess$.subscribe((res) => {
+      if (res === 'login') this.isLoggedIn = true;
+    });
     const userType = this.authService.getUserTypeId();
     if (userType === UserType.User) {
       this.isUser = true;
@@ -25,6 +34,7 @@ export class SideNavComponent implements OnInit {
   ngOnInit(): void {}
 
   logout() {
+    this.isLoggedIn = false;
     this.authService.logout();
   }
 }

@@ -46,6 +46,7 @@ export class MyJobOffersComponent implements OnInit {
             id: job.id,
             isLiked: false,
             candidates: [],
+            isApplied: true,
           };
         });
       });

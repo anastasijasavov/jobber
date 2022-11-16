@@ -33,7 +33,7 @@ export class ProfileComponent implements OnDestroy {
     });
 
     this.userSub = this.authService
-      .getUserByEmail(this.authService.getUserEmail())
+      .getUserByEmail(this.authService.getUserEmail()!)
       .subscribe((res: User[]) => {
         this.user = res[0];
 
@@ -78,10 +78,7 @@ export class ProfileComponent implements OnDestroy {
                 console.log('removed linked job applications')
               );
           //delete related job offers
-          else
-            this.jobService
-              .removeJobOffers(this.user?.id!)
-              .subscribe((res) => console.log('removed linked job offers'));
+          else this.jobService.removeJobOffers(this.user?.id!);
         })
       )
       .subscribe((res) => {

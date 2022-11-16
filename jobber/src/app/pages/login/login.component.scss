@@ -1,6 +1,21 @@
 .example-form {
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  justify-content: center;
+  text-align: center;
+  width: 30em;
   margin: auto;
+  height: 100%;
+  overflow-y: hidden;
+  transform: translate(50%, 50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 2%;
+  .buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    button {
+      margin: 10px;
+    }
+  }
 }

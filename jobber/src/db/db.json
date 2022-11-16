@@ -6,6 +6,7 @@
       "lastName": "Savov",
       "password": "sifra",
       "email": "anastasija.savov2000@gmail.com",
+      "phoneNumber": null,
       "userTypeId": 1
     },
     {
@@ -24,8 +25,7 @@
       "password": "sifrica123",
       "userTypeId": 2,
       "phoneNumber": "648979230",
-      "id": 4,
-      "name": "undefined undefined"
+      "id": 4
     }
   ],
   "jobs": [
@@ -85,13 +85,6 @@
       "appliedAt": "2022-11-15T22:41:03.400Z",
       "isApproved": null,
       "id": 4
-    }
-  ],
-  "organizationOffers": [
-    {
-      "id": 1,
-      "organizationId": 2,
-      "jobOfferId": 1
     }
   ],
   "userTypes": [

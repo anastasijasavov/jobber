@@ -22,8 +22,8 @@ export class AuthService {
 
   login(user: UserLoginDto) {
     const params = [
-      { name: 'email', value: user.email },
-      { name: 'password', value: user.pass },
+      { name: 'email', value: user.email! },
+      { name: 'password', value: user.pass! },
     ];
     return this.httpService.get<User[]>(
       Constants.BASE_URL + Constants.USERS_ENDPOINT,
@@ -37,11 +37,11 @@ export class AuthService {
     return true;
   }
 
-  getUserEmail() {
+  getUserEmail(): string | null {
     const user: Pick<User, 'email' | 'id'> = JSON.parse(
       localStorage.getItem('user')!
     );
-    return user.email;
+    return user?.email;
   }
   getUserId() {
     const user = localStorage.getItem('user');

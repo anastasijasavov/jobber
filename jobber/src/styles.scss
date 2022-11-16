@@ -1,11 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
-  height: 100%;
-}
 body {
   margin: 0;
+  height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .cards {
@@ -37,4 +34,10 @@ li {
 
 .hideDialog {
   display: none;
+}
+
+.title {
+  margin: auto;
+  font-size: large;
+  font-weight: 500;
 }

@@ -22,6 +22,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MyJobsComponent } from './pages/my-jobs/my-jobs.component';
 import { MyJobOffersComponent } from './pages/my-job-offers/my-job-offers.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

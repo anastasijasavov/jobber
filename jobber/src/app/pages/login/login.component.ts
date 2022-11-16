@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { UserLoginDto } from 'src/app/dtos/user-login.dto';
 import { AuthService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required]),
     pass: new FormControl('', [Validators.required, Validators.min(5)]),
   });
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private sharedService: SharedService
+  ) {}
 
   sub: Subscription = new Subscription();
   ngOnInit(): void {}
@@ -39,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               })
             );
           });
+          this.sharedService.notifyOfLogin();
           this.router.navigate(['home']);
         }
         //else add validation

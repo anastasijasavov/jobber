@@ -1,8 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
 
-export class Param {
-  name?: string;
-  value?: string;
+export interface Param {
+  name: string;
+  value: string;
 }
 
 export function generateHeaders() {

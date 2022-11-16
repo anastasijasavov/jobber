@@ -8,9 +8,16 @@ import { JobOfferCreateDto } from '../dtos/job-offer-create.dto';
 export class SharedService {
   private newJobSource = new Subject();
   newJobMessage = this.newJobSource.asObservable();
+
+  private loginSource = new Subject();
+  loginSucess$ = this.loginSource.asObservable();
+
   constructor() {}
 
   sendJob(job: JobOfferCreateDto) {
     this.newJobSource.next(job);
+  }
+  notifyOfLogin() {
+    this.loginSource.next('login');
   }
 }

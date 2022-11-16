@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { generateHeaders, Param } from '../helper/helper';
@@ -11,18 +11,23 @@ export class HttpUtilsService {
 
   get<T>(url: string, params?: Param[]): Observable<T> {
     const headers = generateHeaders();
-    let isFirstParam = true;
-    let paramsString = '';
-    params?.forEach((param) => {
-      if (isFirstParam) {
-        isFirstParam = false;
-        paramsString += '?';
-      } else {
-        paramsString += `&`;
-      }
-      paramsString += `${param.name}=${param.value}`;
+    const httpParams: HttpParams = new HttpParams();
+    params?.forEach((x) => httpParams.append(x.name!, x.value!));
+    // let isFirstParam = true;
+    // let paramsString = '';
+    // params?.forEach((param) => {
+    //   if (isFirstParam) {
+    //     isFirstParam = false;
+    //     paramsString += '?';
+    //   } else {
+    //     paramsString += `&`;
+    //   }
+    //   paramsString += `${param.name}=${param.value}`;
+    // });
+    return this.http.get<T>(url, {
+      headers: headers,
+      params: httpParams,
     });
-    return this.http.get<T>(url + paramsString, { headers: headers });
   }
 
   post<T>(url: string, body: Partial<T>) {

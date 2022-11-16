@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { first, map, of, Subscription, switchMap, take } from 'rxjs';
 import { JobOfferViewDto } from 'src/app/dtos/job-offer-view.dto';
 import { UserType } from 'src/app/helper/helper';
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   isOrganization = false;
   constructor(
     private jobService: JobOfferService,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {
     this.isOrganization =
       this.authService.getUserTypeId() === UserType.Organization;
@@ -44,7 +46,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.jobService
             .isLikedJob(tempJob.id!, this.userId!)
             .subscribe((jobLike) => {
-              tempJob.isLiked = jobLike && jobLike.length > 0 ? true : false;
+              tempJob.isLiked = jobLike?.length > 0 ? true : false;
+            });
+          this.jobService
+            .isAppliedForJob(tempJob.id!, this.userId!)
+            .subscribe((res) => {
+              if (res?.length > 0) tempJob.isApplied = true;
             });
           return tempJob;
         });
@@ -62,9 +69,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   applyForJob(job: JobOfferViewDto) {
     this.jobApplication = this.jobService
       .applyForJob(this.userId!, job.id!)
-      .subscribe((res) => console.log(res));
+      .subscribe((res) => {
+        if (res) this._snackBar.open('Successfully applied for a job');
+      });
   }
 
+  removeApplication(job: JobOfferViewDto) {
+    this.jobService.getUserJob(job.id!, this.userId!).pipe(
+      map((res) => {
+        this.jobService.removeUserJobs(res[0]).subscribe((result) => {
+          this.jobs.find((j) => j.id === job.id)!.isApplied = false;
+          console.log(result);
+
+          this._snackBar.open('Successfully removed job application.');
+        });
+      })
+    );
+  }
   like(job: JobOfferViewDto, likeCount: number) {
     job.likesCount! += likeCount;
     job.isLiked = !job.isLiked;

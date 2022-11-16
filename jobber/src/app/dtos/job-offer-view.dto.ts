@@ -8,6 +8,7 @@ export class JobOfferViewDto extends JobOfferCreateDto {
   jobTypeName?: string;
   jobCategoryName?: string;
   candidates?: User[] = [];
+  isApplied: boolean = false;
   constructor(
     id: number,
     header: string,

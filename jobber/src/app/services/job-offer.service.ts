@@ -40,8 +40,6 @@ export class JobOfferService {
 
   removeJobOffers(createdBy: number) {
     //first delete related candidates for the job and then the jobs for the specified user
-    // this.removeUserJobs({ userId: userId }).pipe(
-    //   map((res) => {
     this.getJobsByOrganization(createdBy)
       .pipe(
         switchMap((res: JobOffer[]) => from(res)),
@@ -55,8 +53,6 @@ export class JobOfferService {
             createdBy
         );
       });
-    //   })
-    // );
   }
 
   getJobOffers(): Observable<JobOffer[]> {
@@ -91,6 +87,16 @@ export class JobOfferService {
     ];
     return this.httpService.get<JobLike[]>(
       Constants.BASE_URL + Constants.JOB_LIKES_ENDPOINT,
+      params
+    );
+  }
+  isAppliedForJob(jobId: number, userId: number) {
+    const params: Param[] = [
+      { name: 'jobId', value: jobId.toString() },
+      { name: 'userId', value: userId.toString() },
+    ];
+    return this.httpService.get<UserJob[]>(
+      Constants.BASE_URL + Constants.USER_JOBS_ENDPOINT,
       params
     );
   }
