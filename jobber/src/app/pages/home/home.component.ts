@@ -25,12 +25,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     private jobService: JobOfferService,
     private authService: AuthService,
     private _snackBar: MatSnackBar
-  ) {
-    this.isOrganization =
-      this.authService.getUserTypeId() === UserType.Organization;
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.isOrganization =
+      this.authService.getUserTypeId() === UserType.Organization;
     this.jobSub = this.jobService.getJobOffers().subscribe({
       next: (res: JobOffer[]) => {
         this.jobs = res.map((job: JobOffer) => {
@@ -70,7 +69,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.jobApplication = this.jobService
       .applyForJob(this.userId!, job.id!)
       .subscribe((res) => {
-        if (res) this._snackBar.open('Successfully applied for a job');
+        if (res)
+          this._snackBar.open('Successfully applied for a job', '', {
+            duration: 3000,
+            panelClass: ['green-snack'],
+          });
       });
   }
 
@@ -81,7 +84,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.jobs.find((j) => j.id === job.id)!.isApplied = false;
           console.log(result);
 
-          this._snackBar.open('Successfully removed job application.');
+          this._snackBar.open('Successfully removed job application.', '', {
+            duration: 3000,
+            panelClass: ['green-snack'],
+          });
         });
       })
     );

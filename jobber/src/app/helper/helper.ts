@@ -12,8 +12,8 @@ export function generateHeaders() {
 }
 
 export enum UserType {
-  User = 1,
-  Organization = 2,
+  Organization = 1,
+  User = 2,
 }
 
 export enum JobType {

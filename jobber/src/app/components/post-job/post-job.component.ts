@@ -53,6 +53,8 @@ export class PostJobComponent implements OnInit {
     job.createdBy = this.orgId!;
     this.jobService.addJobOffer(job).subscribe((res: JobOfferCreateDto) => {
       if (res) {
+        console.log(res);
+
         this.sharedService.sendJob(res);
       }
     });

@@ -23,18 +23,26 @@ export class SideNavComponent implements OnInit {
       this.router.navigate(['login']);
     } else this.isLoggedIn = true;
     this.sharedService.loginSucess$.subscribe((res) => {
-      if (res === 'login') this.isLoggedIn = true;
+      if (res === 'login') {
+        this.setNavForUser();
+        this.isLoggedIn = true;
+      }
     });
-    const userType = this.authService.getUserTypeId();
-    if (userType === UserType.User) {
-      this.isUser = true;
-    } else this.isUser = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setNavForUser();
+  }
 
   logout() {
     this.isLoggedIn = false;
     this.authService.logout();
+  }
+
+  setNavForUser() {
+    const userType = this.authService.getUserTypeId();
+    if (userType === UserType.User) {
+      this.isUser = true;
+    } else this.isUser = false;
   }
 }

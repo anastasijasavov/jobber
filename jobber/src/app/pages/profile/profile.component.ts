@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { map, Subscription } from 'rxjs';
-import { UserCreateDto } from 'src/app/dtos/user-create.dto';
 import { UserType } from 'src/app/helper/helper';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,12 +23,13 @@ export class ProfileComponent implements OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private jobService: JobOfferService
+    private jobService: JobOfferService,
+    private _snackBar: MatSnackBar
   ) {
     this.userForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      passwordHash: new FormControl('', Validators.required),
       phoneNumber: new FormControl(''),
     });
 
@@ -36,11 +37,11 @@ export class ProfileComponent implements OnDestroy {
       .getUserByEmail(this.authService.getUserEmail()!)
       .subscribe((res: User[]) => {
         this.user = res[0];
-
         this.userForm.patchValue({
           firstName: this.user.firstName,
           lastName: this.user.lastName,
-          password: this.user.passwordHash,
+          passwordHash: this.user.passwordHash,
+          phoneNumber: this.user.phoneNumber,
         });
       });
   }
@@ -59,10 +60,16 @@ export class ProfileComponent implements OnDestroy {
     if (this.user) {
       this.user.firstName = this.userForm.get('firstName')?.value;
       this.user.lastName = this.userForm.get('lastName')?.value;
+      this.user.passwordHash = this.userForm.get('passwordHash')?.value;
       this.user.phoneNumber = this.userForm.get('phoneNumber')?.value;
       this.userSaveSub = this.authService
         .saveUserInfo(this.user)
-        .subscribe((res) => console.log(res));
+        .subscribe((res) =>
+          this._snackBar.open('Saved profile information', '', {
+            duration: 3000,
+            panelClass: ['green-snack'],
+          })
+        );
     }
   }
   deleteAccount() {

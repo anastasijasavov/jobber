@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostJobComponent } from 'src/app/components/post-job/post-job.component';
 import { JobOfferCreateDto } from 'src/app/dtos/job-offer-create.dto';
 import { JobOfferViewDto } from 'src/app/dtos/job-offer-view.dto';
@@ -16,13 +17,14 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class MyJobOffersComponent implements OnInit {
   @ViewChild('app-post-job') postJobDialog: PostJobComponent;
-
+  isEmptyData = false;
   jobOffers: JobOfferViewDto[];
   constructor(
     private jobService: JobOfferService,
     private authService: AuthService,
     private sharedService: SharedService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class MyJobOffersComponent implements OnInit {
     this.jobService
       .getJobsByOrganization(this.authService.getUserId()!)
       .subscribe((res: JobOffer[]) => {
+        if (res?.length > 0) this.isEmptyData = true;
         this.jobOffers = res.map((job) => {
           return {
             header: job.header,
@@ -47,18 +50,22 @@ export class MyJobOffersComponent implements OnInit {
             isLiked: false,
             candidates: [],
             isApplied: true,
+            showCandidates: false,
           };
         });
       });
   }
   showCandidates(jobId: number) {
-    this.jobService.getCandidatesByJob(jobId).subscribe((res) =>
-      res.forEach((jobUser) =>
-        this.authService.getUserById(jobUser.userId!).subscribe((user) => {
-          this.jobOffers.find((x) => x.id === jobId)?.candidates?.push(user);
-        })
-      )
-    );
+    if (!this.jobOffers.find((x) => x.id === jobId)?.showCandidates)
+      this.jobService.getCandidatesByJob(jobId).subscribe((res) =>
+        res.forEach((jobUser) =>
+          this.authService.getUserById(jobUser.userId!).subscribe((user) => {
+            const tempJob = this.jobOffers.find((x) => x.id === jobId);
+            tempJob?.candidates?.push(user);
+            tempJob!.showCandidates = true;
+          })
+        )
+      );
   }
 
   updateCandidate(userId: number, jobId: number, isApproved: boolean) {
@@ -67,18 +74,46 @@ export class MyJobOffersComponent implements OnInit {
       .subscribe((userJobs: UserJob[]) => {
         if (userJobs?.length > 0) {
           let userJob = userJobs[0];
-          userJob.isApproved = isApproved;
-          this.jobService
-            .updateUserJob(userJob.id!, userJob)
-            .subscribe((res) => {
-              console.log(res);
-
-              if (isApproved === false) {
-                this.jobOffers
-                  .find((x) => x.id === jobId)
-                  ?.candidates?.filter((x) => x.id !== userId);
+          if (userJob.isApproved !== isApproved) {
+            userJob.isApproved = isApproved;
+            this.jobService
+              .updateUserJob(userJob.id!, userJob)
+              .subscribe((res) => {
+                if (isApproved === false) {
+                  this.jobOffers
+                    .find((x) => x.id === jobId)
+                    ?.candidates?.filter((x) => x.id !== userId);
+                  this._snackBar.open(
+                    'Successfully declined this candidate.',
+                    '',
+                    {
+                      duration: 3000,
+                      panelClass: ['green-snack'],
+                    }
+                  );
+                } else {
+                  this._snackBar.open(
+                    'Successfully approved this candidate.',
+                    '',
+                    {
+                      duration: 3000,
+                      panelClass: ['green-snack'],
+                    }
+                  );
+                }
+              });
+          } else {
+            this._snackBar.open(
+              `You already ${
+                isApproved ? 'approved ' : 'declined '
+              } this candidate`,
+              '',
+              {
+                duration: 3000,
+                panelClass: ['red-snack'],
               }
-            });
+            );
+          }
         }
       });
   }
@@ -90,7 +125,10 @@ export class MyJobOffersComponent implements OnInit {
       data: {},
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.jobOffers.push(result);
+      if (result) {
+        this.jobOffers.push(result);
+        this.isEmptyData = false;
+      }
     });
   }
 }

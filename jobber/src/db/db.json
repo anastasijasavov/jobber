@@ -6,7 +6,7 @@
       "lastName": "Savov",
       "password": "sifra",
       "email": "anastasija.savov2000@gmail.com",
-      "phoneNumber": null,
+      "phoneNumber": "",
       "userTypeId": 1
     },
     {
@@ -35,7 +35,7 @@
       "description": "We are looking for an experienced .NET Developer with minimum  od 3 years of work experience.",
       "workTypeId": 1,
       "categoryId": 1,
-      "createdBy": 2,
+      "createdBy": 1,
       "likesCount": 3
     },
     {
@@ -44,17 +44,8 @@
       "description": "We are looking for an experienced UX designer with minimum of 1 year of work experience.",
       "workTypeId": 1,
       "categoryId": 1,
-      "createdBy": 2,
+      "createdBy": 1,
       "likesCount": 2
-    },
-    {
-      "likesCount": 1,
-      "header": "testic poso",
-      "description": "poslic",
-      "workTypeId": 0,
-      "categoryId": 0,
-      "createdBy": 4,
-      "id": 3
     }
   ],
   "userJobs": [
@@ -70,20 +61,20 @@
       "jobId": 2,
       "appliedAt": "2022-11-12T18:12:14.361Z",
       "id": 2,
-      "isApproved": false
+      "isApproved": true
     },
     {
       "userId": 4,
       "jobId": 1,
       "appliedAt": "2022-11-13T00:53:44.483Z",
       "id": 3,
-      "isApproved": false
+      "isApproved": true
     },
     {
       "userId": 1,
       "jobId": 3,
       "appliedAt": "2022-11-15T22:41:03.400Z",
-      "isApproved": null,
+      "isApproved": true,
       "id": 4
     }
   ],
@@ -127,11 +118,6 @@
   ],
   "jobLikes": [
     {
-      "userId": 1,
-      "jobId": 2,
-      "id": 2
-    },
-    {
       "userId": 4,
       "jobId": 1,
       "id": 3
@@ -150,6 +136,16 @@
       "userId": 1,
       "jobId": 3,
       "id": 6
+    },
+    {
+      "userId": 3,
+      "jobId": 4,
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "jobId": 2,
+      "id": 8
     }
   ]
 }

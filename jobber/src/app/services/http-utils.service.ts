@@ -11,22 +11,21 @@ export class HttpUtilsService {
 
   get<T>(url: string, params?: Param[]): Observable<T> {
     const headers = generateHeaders();
-    const httpParams: HttpParams = new HttpParams();
-    params?.forEach((x) => httpParams.append(x.name!, x.value!));
-    // let isFirstParam = true;
-    // let paramsString = '';
-    // params?.forEach((param) => {
-    //   if (isFirstParam) {
-    //     isFirstParam = false;
-    //     paramsString += '?';
-    //   } else {
-    //     paramsString += `&`;
-    //   }
-    //   paramsString += `${param.name}=${param.value}`;
-    // });
-    return this.http.get<T>(url, {
+    // const httpParams: HttpParams = new HttpParams();
+    // params?.forEach((x) => httpParams.append(x.name!, x.value!));
+    let isFirstParam = true;
+    let paramsString = '';
+    params?.forEach((param) => {
+      if (isFirstParam) {
+        isFirstParam = false;
+        paramsString += '?';
+      } else {
+        paramsString += `&`;
+      }
+      paramsString += `${param.name}=${param.value}`;
+    });
+    return this.http.get<T>(url + paramsString, {
       headers: headers,
-      params: httpParams,
     });
   }
 

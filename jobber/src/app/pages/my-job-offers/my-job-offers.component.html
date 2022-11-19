@@ -1,11 +1,20 @@
-<mat-label>My job offers</mat-label>
-<button mat-button color="accent" (click)="openJobDialog()">Post a job</button>
+<mat-label class="title">My job offers</mat-label>
+<button class="btn" mat-raised-button color="primary" (click)="openJobDialog()">
+  Post a job
+</button>
+<mat-label class="label" [hidden]="isEmptyData"
+  >You haven't posted any jobs.</mat-label
+>
 <div class="cards">
   <mat-card class="card" *ngFor="let myJob of jobOffers">
     <mat-card-title>{{ myJob.header }}</mat-card-title>
     <mat-card-content>{{ myJob.description }}</mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="showCandidates(myJob.id!)">
+      <button
+        mat-button
+        [hidden]="myJob.showCandidates"
+        (click)="showCandidates(myJob.id!)"
+      >
         Show candidates
       </button>
     </mat-card-actions>
