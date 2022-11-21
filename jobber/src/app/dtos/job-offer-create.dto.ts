@@ -8,3 +8,6 @@ export class JobOfferCreateDto {
   createdBy?: number;
   likesCount = 0;
 }
+export class JobOfferUpdateDto extends JobOfferCreateDto {
+  id: number;
+}

@@ -17,6 +17,16 @@
       >
         Show candidates
       </button>
+      <button mat-raised-button color="primary" (click)="openEditJob(myJob)">
+        Edit Job
+      </button>
+      <button
+        mat-raised-button
+        color="secondary"
+        (click)="deleteJob(myJob.id!)"
+      >
+        Delete Job
+      </button>
     </mat-card-actions>
     <mat-card-footer>
       <mat-label>{{ myJob.jobCategoryName }}</mat-label>

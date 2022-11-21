@@ -25,4 +25,5 @@ export enum JobType {
 export enum JobCategory {
   OfficeAdministration = 1,
   Development = 2,
+  HR = 3,
 }

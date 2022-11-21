@@ -10,19 +10,19 @@
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Job type</mat-label>
-    <mat-select>
-      <mat-option value="remote">Remote</mat-option>
-      <mat-option value="fullTime">Full time</mat-option>
-      <mat-option value="partTime">Part time</mat-option>
-    </mat-select>
+    <select matNativeControl #jobTypesDropdown formControlName="jobType">
+      <option [ngValue]="jobType.id" *ngFor="let jobType of jobTypes">
+        {{ jobType.name }}
+      </option>
+    </select>
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Job category</mat-label>
-    <mat-select>
-      <mat-option value="category.id" *ngFor="let category of categories">{{
-        category.name
-      }}</mat-option>
-    </mat-select>
+    <select matNativeControl #jobCatsDropdown formControlName="jobCategory">
+      <option [ngValue]="category.id" *ngFor="let category of categories">
+        {{ category.name }}
+      </option>
+    </select>
   </mat-form-field>
   <div class="buttons">
     <button mat-button mat-dialog-close>Cancel</button>
@@ -31,8 +31,18 @@
       color="primary"
       [mat-dialog-close]="true"
       (click)="submit()"
+      *ngIf="!isEdit"
     >
       Post
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="true"
+      (click)="submit()"
+      *ngIf="isEdit"
+    >
+      Save
     </button>
   </div>
 </form>

@@ -32,20 +32,20 @@
     {
       "id": 1,
       "header": ".NET Developer",
-      "description": "We are looking for an experienced .NET Developer with minimum  od 3 years of work experience.",
-      "workTypeId": 1,
+      "description": "We're looking for an experienced .NET Developer with minimum  od 3 years of work experience.",
+      "workTypeId": 2,
       "categoryId": 1,
       "createdBy": 1,
       "likesCount": 3
     },
     {
-      "id": 2,
-      "header": "UI/UX Designer",
-      "description": "We are looking for an experienced UX designer with minimum of 1 year of work experience.",
+      "likesCount": 1,
+      "header": "QA Tester",
+      "description": "We're looking for a QA Automation tester that has profound knnonwledge of Jenkins, Jest...",
       "workTypeId": 1,
       "categoryId": 1,
       "createdBy": 1,
-      "likesCount": 2
+      "id": 2
     }
   ],
   "userJobs": [
@@ -57,25 +57,11 @@
       "isApproved": true
     },
     {
-      "userId": 1,
-      "jobId": 2,
-      "appliedAt": "2022-11-12T18:12:14.361Z",
-      "id": 2,
-      "isApproved": true
-    },
-    {
       "userId": 4,
       "jobId": 1,
       "appliedAt": "2022-11-13T00:53:44.483Z",
       "id": 3,
       "isApproved": true
-    },
-    {
-      "userId": 1,
-      "jobId": 3,
-      "appliedAt": "2022-11-15T22:41:03.400Z",
-      "isApproved": true,
-      "id": 4
     }
   ],
   "userTypes": [
@@ -123,29 +109,14 @@
       "id": 3
     },
     {
-      "userId": 4,
-      "jobId": 2,
-      "id": 4
-    },
-    {
       "userId": 1,
       "jobId": 1,
       "id": 5
     },
     {
       "userId": 1,
-      "jobId": 3,
-      "id": 6
-    },
-    {
-      "userId": 3,
-      "jobId": 4,
-      "id": 7
-    },
-    {
-      "userId": 1,
       "jobId": 2,
-      "id": 8
+      "id": 6
     }
   ]
 }

@@ -10,7 +10,10 @@ import {
   tap,
 } from 'rxjs';
 import { Constants } from '../app.constants';
-import { JobOfferCreateDto } from '../dtos/job-offer-create.dto';
+import {
+  JobOfferCreateDto,
+  JobOfferUpdateDto,
+} from '../dtos/job-offer-create.dto';
 import { JobOfferViewDto } from '../dtos/job-offer-view.dto';
 import { Param } from '../helper/helper';
 import { JobCategory } from '../models/job-category.model';
@@ -33,7 +36,7 @@ export class JobOfferService {
     );
   }
   removeJobOffer(id: number) {
-    this.httpService.delete(
+    return this.httpService.delete(
       Constants.BASE_URL + Constants.JOBS_ENDPOINT + '/' + id
     );
   }
@@ -64,7 +67,7 @@ export class JobOfferService {
       .get<JobOffer>(Constants.BASE_URL + Constants.JOBS_ENDPOINT + '/' + id)
       .pipe(first());
   }
-  updateJobOffer(job: JobOfferViewDto) {
+  updateJobOffer(job: JobOfferUpdateDto | JobOfferViewDto) {
     return this.getJobOfferById(job.id!).pipe(
       switchMap((dbJob) => {
         dbJob!.likesCount = job.likesCount;

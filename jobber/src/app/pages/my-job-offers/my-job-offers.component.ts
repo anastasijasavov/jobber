@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { map } from 'rxjs';
 import { PostJobComponent } from 'src/app/components/post-job/post-job.component';
 import { JobOfferCreateDto } from 'src/app/dtos/job-offer-create.dto';
 import { JobOfferViewDto } from 'src/app/dtos/job-offer-view.dto';
@@ -130,5 +131,36 @@ export class MyJobOffersComponent implements OnInit {
         this.isEmptyData = false;
       }
     });
+  }
+
+  openEditJob(job: JobOfferViewDto) {
+    const dialogRef = this.dialog.open(PostJobComponent, {
+      width: '450px',
+      height: '450px',
+      data: job,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getJobs();
+        this.isEmptyData = false;
+      }
+    });
+  }
+
+  deleteJob(id: number) {
+    this.jobService
+      .removeJobOffer(id)
+      .pipe(
+        map((res) => {
+          return this.jobService.removeUserJobs({ jobId: id });
+        })
+      )
+      .subscribe((res) => {
+        this.jobOffers = this.jobOffers.filter((x) => x.id !== id);
+        this._snackBar.open('Succesfully removed job offer', '', {
+          duration: 3000,
+          panelClass: ['green-snack'],
+        });
+      });
   }
 }
